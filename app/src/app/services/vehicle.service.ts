@@ -12,12 +12,19 @@ export class VehicleService {
 
   getAllVehicles(): Observable<IVehicle[]> {
     return this.http.get('data/vehicles.json').pipe(
-      map(data => {
+      map(res => {
         const vehicleArray: Array<IVehicle> = [];
 
-        for(const id in data) {
-          if(data.hasOwnProperty(id)) {
-            vehicleArray.push(data[id as keyof object]);
+        for(const id in res) {
+          if(res.hasOwnProperty(id)) {
+            const data = res[id as keyof object];
+            let vehicle: IVehicle = {
+              Id: parseInt(data['id']),
+              Title: data['title'],
+              Type: data['type'],
+              Price: parseFloat(data['price'])
+            }
+            vehicleArray.push(vehicle);
           }
         }
         return vehicleArray;
