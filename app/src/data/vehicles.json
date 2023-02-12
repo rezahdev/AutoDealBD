@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Great Used Car",
+        "type": "Car",
+        "price": 12000
+    },
+    {
+        "id": 2,
+        "title": "Great Used Car 2",
+        "type": "Car",
+        "price": 11000
+    },
+    {
+        "id": 3,
+        "title": "Great Used Car 3",
+        "type": "Car",
+        "price": 15000
+    },
+    {
+        "id": 4,
+        "title": "Great Used Car 4",
+        "type": "Car",
+        "price": 10000
+    },
+    {
+        "id": 5,
+        "title": "Great Used Car 5",
+        "type": "Car",
+        "price": 16000
+    },
+    {
+        "id": 6,
+        "title": "Great Used Car 6",
+        "type": "Car",
+        "price": 16000
+    }
+]

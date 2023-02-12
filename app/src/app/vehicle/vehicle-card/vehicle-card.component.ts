@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { faEdit, faSearchPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-vehicle-card',
@@ -7,9 +8,7 @@ import { Component } from '@angular/core';
 })
 
 export class VehicleCardComponent {
-    Vehicle: any = {
-        "id": 1,
-        "type": "Car",
-        "price": 12000
-    }
+    @Input() vehicle: any;
+    faEdit = faEdit;
+    faZoomIn = faSearchPlus;
  }
