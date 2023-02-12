@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -7,13 +7,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./vehicle-list.component.css']
 })
 export class VehicleListComponent implements OnInit{
-  vehicles: any;
+  vehicles: Array<object> = [];
 
-  constructor(private http:HttpClient) { }
+  constructor(private vehicleService:VehicleService) { }
 
   ngOnInit(): void {
-    this.http.get('data/vehicles.json').subscribe( data => { 
+    this.vehicleService.getAllVehicles().subscribe( data => { 
       this.vehicles = data;
+    }, error => {
+      console.log(error);
     })
   }
 }

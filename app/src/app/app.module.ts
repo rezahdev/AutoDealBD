@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { VehicleCardComponent } from './vehicle/vehicle-card/vehicle-card.component';
 import { VehicleListComponent } from './vehicle/vehicle-list/vehicle-list.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { VehicleService } from './services/vehicle.service';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    VehicleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
