@@ -11,11 +11,12 @@ import { VehicleListComponent } from './vehicle/vehicle-list/vehicle-list.compon
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { VehicleService } from './services/vehicle.service';
 import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
+import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component';
 
 const routes: Routes = [
   { path: '', component: VehicleListComponent },
   { path: 'used', component: VehicleListComponent },
-  { path: 'post', component: VehicleListComponent },
+  { path: 'post', component: AddVehicleComponent },
   { path: 'detail/:id', component: VehicleDetailComponent }
 ]
 
@@ -25,7 +26,8 @@ const routes: Routes = [
     VehicleCardComponent,
     VehicleListComponent,
     NavBarComponent,
-    VehicleDetailComponent
+    VehicleDetailComponent,
+    AddVehicleComponent
   ],
   imports: [
     BrowserModule,
