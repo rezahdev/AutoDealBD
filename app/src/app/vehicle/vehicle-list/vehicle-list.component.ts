@@ -10,7 +10,7 @@ import { IVehicle } from '../IVehicle.interface';
 export class VehicleListComponent implements OnInit{
   vehicles!: Array<IVehicle>;
 
-  constructor(private vehicleService:VehicleService) { }
+  constructor(private vehicleService: VehicleService) { }
 
   ngOnInit(): void {
     this.vehicleService.getAllVehicles().subscribe( data => { 
