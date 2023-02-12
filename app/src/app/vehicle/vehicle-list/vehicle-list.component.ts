@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { IVehicle } from '../IVehicle.interface';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -7,7 +8,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   styleUrls: ['./vehicle-list.component.css']
 })
 export class VehicleListComponent implements OnInit{
-  vehicles: Array<object> = [];
+  vehicles!: Array<IVehicle>;
 
   constructor(private vehicleService:VehicleService) { }
 
