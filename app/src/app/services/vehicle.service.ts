@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs'
+import { map, Observable } from 'rxjs';
+
+import { IVehicle } from '../vehicle/IVehicle.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +10,10 @@ import { map } from 'rxjs'
 export class VehicleService {
   constructor(private http:HttpClient) { }
 
-  getAllVehicles() {
+  getAllVehicles(): Observable<IVehicle[]> {
     return this.http.get('data/vehicles.json').pipe(
       map(data => {
-        const vehicleArray: Array<object> = [];
+        const vehicleArray: Array<IVehicle> = [];
 
         for(const id in data) {
           if(data.hasOwnProperty(id)) {
