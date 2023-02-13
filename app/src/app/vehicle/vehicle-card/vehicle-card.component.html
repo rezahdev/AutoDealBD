@@ -1,7 +1,10 @@
 <div class="shadow-lg p-1 rounded">
     <div class="card border-0">
         <div class="img-wrapper">
-            <img src="assets/images/default.jpg" class="card-img-top" alt="Car Default Image">
+            <img *ngIf="vehicle.Images.length > 0" 
+                src="assets/images/{{vehicle.Images[0]}}" 
+                class="card-img-top" alt="Car Image">
+            <img *ngIf="vehicle.Images.length == 0" src="assets/images/default.jpg" class="card-img-top" alt="Car Default Image">
             <ul class="list-inline text-center arrow-btn">
                 <li class="list-inline-item">
                     <button class="btn btn-primary" routerLink="/detail/{{vehicle.Id}}"><fa-icon [icon]="faEdit"></fa-icon></button>
@@ -18,7 +21,8 @@
             <h5 class="card-title">{{ vehicle.Title }}</h5>
             <p>Id: {{vehicle.Id }}</p>
             <p class="card-text">Price: ${{ vehicle.Price }}</p>
-            <p>Type: {{ vehicle.Type }}</p>
+            <p>Type: {{ vehicle.VehicleType }}</p>
+            <p>Condition: {{ vehicle.Condition }}</p>
         </div>
     </div>
 </div>

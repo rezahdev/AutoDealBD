@@ -1,6 +1,10 @@
 export interface IVehicle {
-    Id: Number;
-    Title: String;
-    Price: Number;
-    Type: String;
+    Id: number;
+    Title: string;
+    VehicleType: string;
+    Condition: string; 
+    ConditionDetails?: string;
+    Kilometres?: number;
+    Price: number;
+    Images: Array<string>;
 }

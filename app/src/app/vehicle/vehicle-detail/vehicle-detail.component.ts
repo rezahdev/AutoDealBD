@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -8,11 +8,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class VehicleDetailComponent implements OnInit {
-  vehicleId!: Number;
+  vehicleId!: number;
   
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.vehicleId = this.route.snapshot.params['id'];
+    this.vehicleId = +this.route.snapshot.params['id'];
+
+    this.route.params.subscribe(params => {
+      this.vehicleId = +params['id'];
+    })
+  }
+
+  onSelectNext(): void {
+    this.router.navigate(['detail', ++this.vehicleId]);
   }
 }

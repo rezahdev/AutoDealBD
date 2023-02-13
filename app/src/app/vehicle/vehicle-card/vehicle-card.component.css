@@ -2,7 +2,8 @@ h1 {
     font-weight: normal;
 }
 .card {
-    width: 250px;
+    width: 300px;
+    height: 400px;
     cursor: pointer;
 }
 .card img {
