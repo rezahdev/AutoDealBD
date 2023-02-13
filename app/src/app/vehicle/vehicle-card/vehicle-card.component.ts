@@ -5,11 +5,11 @@ import { IVehicle } from '../IVehicle.interface';
 @Component({
     selector: 'app-vehicle-card',
     templateUrl: 'vehicle-card.component.html',
-    styleUrls:  ['vehicle-card.component.css']
+    styleUrls: ['vehicle-card.component.css']
 })
 
 export class VehicleCardComponent {
     @Input() vehicle!: IVehicle;
     faEdit = faEdit;
     faZoomIn = faSearchPlus;
- }
+}

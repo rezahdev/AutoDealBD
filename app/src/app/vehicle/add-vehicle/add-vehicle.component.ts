@@ -14,12 +14,12 @@ export class AddVehicleComponent implements OnInit {
   readonly CONDITION = {
     Used: VehicleSettings.CONDITION.Used,
     New: VehicleSettings.CONDITION.New
-  } 
+  }
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    
+
   }
 
   onFormSubmit(form: NgForm): void {

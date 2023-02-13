@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class VehicleDetailComponent implements OnInit {
   vehicleId!: number;
-  
+
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {

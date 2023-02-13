@@ -13,12 +13,16 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { VehicleService } from './services/vehicle.service';
 import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.component';
 import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component';
+import { UserLoginComponent } from './user/user-login/user-login.component';
+import { UserRegisterComponent } from './user/user-register/user-register.component';
 
 const routes: Routes = [
   { path: '', component: VehicleListComponent },
   { path: 'used', component: VehicleListComponent },
   { path: 'post', component: AddVehicleComponent },
-  { path: 'detail/:id', component: VehicleDetailComponent }
+  { path: 'detail/:id', component: VehicleDetailComponent },
+  { path: 'login', component: UserLoginComponent },
+  { path: 'register', component: UserRegisterComponent }
 ]
 
 @NgModule({
@@ -28,12 +32,14 @@ const routes: Routes = [
     VehicleListComponent,
     NavBarComponent,
     VehicleDetailComponent,
-    AddVehicleComponent
+    AddVehicleComponent,
+    UserLoginComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
-    HttpClientModule, 
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes)
   ],

@@ -11,7 +11,7 @@ export class VehicleSettings {
         Match: (vc1: string, vc2: string): boolean => {
             vc1 = vc1.toLocaleLowerCase();
             vc2 = vc2.toLocaleLowerCase();
-            if(vc1 === "used" || "new") return vc1 === vc2;
+            if (vc1 === "used" || "new") return vc1 === vc2;
             return false;
         }
     }

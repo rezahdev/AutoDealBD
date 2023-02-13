@@ -9,7 +9,7 @@ import { VehicleSettings } from '../vehicle/Vehicle.settings';
 })
 
 export class VehicleService {
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   /**
    * Get all vehicles and return the vehicles with the given vehicle condition. 
@@ -20,12 +20,12 @@ export class VehicleService {
     return this.http.get('data/vehicles.json').pipe(
       map(res => {
         const vehicleArray: Array<IVehicle> = [];
-        
-        for(const id in res) {
-          if(res.hasOwnProperty(id)) {
+
+        for (const id in res) {
+          if (res.hasOwnProperty(id)) {
             const data = res[id as keyof object];
-            
-            if(VehicleSettings.CONDITION.Match(data['condition'], vehicleCondition)) {
+
+            if (VehicleSettings.CONDITION.Match(data['condition'], vehicleCondition)) {
               let vehicle: IVehicle = {
                 Id: +data['id'],
                 Title: data['title'],
