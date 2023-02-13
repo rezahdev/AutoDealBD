@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+
+import { VehicleSettings } from '../Vehicle.settings'
 
 @Component({
   selector: 'app-add-vehicle',
@@ -8,13 +11,18 @@ import { Router } from '@angular/router';
 })
 
 export class AddVehicleComponent implements OnInit {
+  readonly CONDITION = {
+    Used: VehicleSettings.CONDITION.Used,
+    New: VehicleSettings.CONDITION.New
+  } 
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     
   }
 
-  onBack(): void {
-    this.router.navigate(['/']);
+  onFormSubmit(form: NgForm): void {
+    console.log(form);
   }
 }

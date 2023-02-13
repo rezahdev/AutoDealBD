@@ -9,13 +9,14 @@ import { VehicleSettings } from '../Vehicle.settings';
   templateUrl: './vehicle-list.component.html',
   styleUrls: ['./vehicle-list.component.css']
 })
+
 export class VehicleListComponent implements OnInit{
   vehicles!: Array<IVehicle>;
 
   constructor(private vehicleService: VehicleService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const vehicleCondition: string = this.route.snapshot.url.toString() == VehicleSettings.CONDITION.Used?
+    const vehicleCondition: string = this.route.snapshot.url.toString() === VehicleSettings.CONDITION.Used?
       VehicleSettings.CONDITION.Used : VehicleSettings.CONDITION.New;
      
     this.vehicleService.getAllVehicles(vehicleCondition).subscribe(data => { 
