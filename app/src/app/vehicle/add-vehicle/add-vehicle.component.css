@@ -1,16 +1,4 @@
 .card {
   width: 60%;
-  margin: 100px 0 0 20%;
-}
-.submit-btn {
-  margin: 0 10px 0 0;
-}
-.ng-invalid.ng-touched {
-  border-color: red;
-}
-.error-msg {
-  color: red;
-}
-.warning-msg {
-  color: orange;
+  margin: 0 0 0 20%;
 }

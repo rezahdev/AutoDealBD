@@ -3,35 +3,59 @@
     <div class="card m-auto">
       <div class="card-header">Register</div>
       <div class="card-body">
-        <form>
-          <div class="form-group col-12">
+        <form [formGroup]="form" (submit)="onSubmit()">
+          <div class="form-group col-12 mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="userName" />
+            <span *ngIf="userName.touched && userName.hasError('required')" class="error-msg">
+              Name is required
+            </span>
           </div>
 
-          <div class="form-group col-12">
+          <div class="form-group col-12 mb-2">
             <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="email" />
+            <span *ngIf="email.touched && email.hasError('required')" class="error-msg">
+              Email is required<br>
+            </span>
+            <span *ngIf="email.touched && email.hasError('email')" class="error-msg">
+              Invalid email
+            </span>
           </div>
 
-          <div class="form-group col-12">
+          <div class="form-group col-12 mb-3">
             <label for="passwrod" class="form-label">Password</label>
-            <input type="text" class="form-control" />
+            <input type="password" class="form-control" formControlName="password" />
+            <span *ngIf="password.touched && password.hasError('required')" class="error-msg">
+              Password is required<br>
+            </span>
+            <span *ngIf="password.touched && password.hasError('minlength')" class="error-msg">
+              Password must be at least 8 characters
+            </span>
           </div>
 
-          <div class="form-group col-12">
+          <div class="form-group col-12 mb-3">
             <label for="cpassword" class="form-label">Confirm Password</label>
-            <input type="text" class="form-control" />
+            <input type="password" class="form-control" formControlName="confirmPassword" />
+            <span *ngIf="confirmPassword.touched && confirmPassword.hasError('required')" class="error-msg">
+              Confirm password is required<br>
+            </span>
+            <span *ngIf="confirmPassword.touched && form.hasError('mismatch')" class="error-msg">
+              Password doesn't match
+            </span>
+          </div>
+
+          <div class="form-group col-12 mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" placeholder="Optional" formControlName="phone" />
+            <span *ngIf="phone.touched && (phone.hasError('pattern') || phone.hasError('maxlength'))" class="error-msg">
+              Invalid phone number
+            </span>
           </div>
 
           <div class="form-group col-12">
-            <label for="mobile" class="form-label">Mobile</label>
-            <input type="text" class="form-control" />
-          </div>
-
-          <div class="form-group col-12">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
+            <button type="submit" class="btn btn-primary submit-btn" [disabled]="!form.valid">Register</button>
+            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
           </div>
         </form>
       </div>
