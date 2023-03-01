@@ -16,7 +16,7 @@ export class AddVehicleComponent implements OnInit {
     New: VehicleSettings.CONDITION.New
   }
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-register',
@@ -8,49 +8,54 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 })
 
 export class UserRegisterComponent implements OnInit{
-  form!: FormGroup;
+  registrationForm!: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.createRegistrationForm();
+  }
+
+  createRegistrationForm()
+  {
+    this.registrationForm = this.formBuilder.group({
       userName: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       confirmPassword: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.maxLength(10)])
-    }, this.passwordValidator)
+    }, { validators: this.passwordMatchValidator })
   }
 
-  passwordValidator(fg: AbstractControl): ValidationErrors | null {
-    const password: string = fg?.get('password')?.value;
-    const cpassword: string = fg?.get('confirmPassword')?.value; 
+  passwordMatchValidator(formGroup: AbstractControl): ValidationErrors | null {
+    const password: string = formGroup?.get('password')?.value;
+    const cpassword: string = formGroup?.get('confirmPassword')?.value; 
 
-    return cpassword === password? null : { mismatch: true };
+    return cpassword === password? null : { passwordMismatch: true };
   }
 
   get userName(): FormControl {
-    return this.form.get('userName') as FormControl;
+    return this.registrationForm.get('userName') as FormControl;
   }
 
   get email(): FormControl {
-    return this.form.get('email') as FormControl;
+    return this.registrationForm.get('email') as FormControl;
   }
 
   get password(): FormControl {
-    return this.form.get('password') as FormControl;
+    return this.registrationForm.get('password') as FormControl;
   }
 
   get confirmPassword(): FormControl {
-    return this.form.get('confirmPassword') as FormControl;
+    return this.registrationForm.get('confirmPassword') as FormControl;
   }
 
   get phone(): FormControl {
-    return this.form.get('phone') as FormControl;
+    return this.registrationForm.get('phone') as FormControl;
   }
 
   onSubmit() {
-    console.log(this.form.valid);
+    console.log(this.registrationForm.valid);
   }
 
 }

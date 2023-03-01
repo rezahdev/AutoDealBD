@@ -1,6 +1,6 @@
 export class VehicleSettings {
     public static readonly CONDITION = {
-        Used: "used",
+        Used: "used", 
         New: "new",
         IsUsed: (vehicleCondition: string): boolean => {
             return (vehicleCondition.toLowerCase() === "used");
