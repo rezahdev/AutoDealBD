@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { faEdit, faSearchPlus } from '@fortawesome/free-solid-svg-icons';
-import { IVehicle } from '../IVehicle.interface';
+import { Vehicle } from '../../models/vehicle';
 
 @Component({
     selector: 'app-vehicle-card',
@@ -9,7 +9,7 @@ import { IVehicle } from '../IVehicle.interface';
 })
 
 export class VehicleCardComponent {
-    @Input() vehicle!: IVehicle;
+    @Input() vehicle!: Vehicle;
     faEdit = faEdit;
     faZoomIn = faSearchPlus;
 }

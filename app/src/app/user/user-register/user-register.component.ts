@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user';
+import { AlertifyService } from 'src/app/services/alertify.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-user-register',
@@ -7,10 +11,32 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
   styleUrls: ['./user-register.component.css']
 })
 
-export class UserRegisterComponent implements OnInit{
+export class UserRegisterComponent implements OnInit {
   registrationForm!: FormGroup;
+  user!: User;
+  isFormSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+
+  get userName(): FormControl {
+    return this.registrationForm.get('userName') as FormControl;
+  }
+
+  get email(): FormControl {
+    return this.registrationForm.get('email') as FormControl;
+  }
+
+  get password(): FormControl {
+    return this.registrationForm.get('password') as FormControl;
+  }
+
+  get confirmPassword(): FormControl {
+    return this.registrationForm.get('confirmPassword') as FormControl;
+  }
+
+  get phone(): FormControl {
+    return this.registrationForm.get('phone') as FormControl;
+  }
 
   ngOnInit(): void {
     this.createRegistrationForm();
@@ -34,28 +60,28 @@ export class UserRegisterComponent implements OnInit{
     return cpassword === password? null : { passwordMismatch: true };
   }
 
-  get userName(): FormControl {
-    return this.registrationForm.get('userName') as FormControl;
-  }
-
-  get email(): FormControl {
-    return this.registrationForm.get('email') as FormControl;
-  }
-
-  get password(): FormControl {
-    return this.registrationForm.get('password') as FormControl;
-  }
-
-  get confirmPassword(): FormControl {
-    return this.registrationForm.get('confirmPassword') as FormControl;
-  }
-
-  get phone(): FormControl {
-    return this.registrationForm.get('phone') as FormControl;
-  }
-
   onSubmit() {
-    console.log(this.registrationForm.valid);
+    this.isFormSubmitted = true;
+    
+    if(this.registrationForm.valid) {
+      this.userService.addUser(this.userData());
+      this.registrationForm.reset();
+      this.isFormSubmitted = false;
+
+      AlertifyService.success('Congratulation! You have successfully created an account!');
+    }
+    else {
+      AlertifyService.error('Please correct all the errors.');
+    }
+  }
+
+  userData(): User {
+    return this.user = {
+      name: this.userName.value,
+      email: this.email.value,
+      password: this.password.value,
+      phone: this.phone.value
+    }
   }
 
 }

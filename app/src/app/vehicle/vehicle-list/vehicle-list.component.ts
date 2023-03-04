@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { IVehicle } from '../IVehicle.interface';
-import { VehicleSettings } from '../Vehicle.settings';
+import { Vehicle } from '../../models/vehicle';
+import { VehicleGlobalProps } from '../vehicle-global-props';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -11,18 +11,18 @@ import { VehicleSettings } from '../Vehicle.settings';
 })
 
 export class VehicleListComponent implements OnInit {
-  vehicles!: Array<IVehicle>;
+  vehicles!: Array<Vehicle>;
 
   constructor(private vehicleService: VehicleService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const vehicleCondition: string = this.route.snapshot.url.toString() === VehicleSettings.CONDITION.Used ?
-      VehicleSettings.CONDITION.Used : VehicleSettings.CONDITION.New;
+    const vehicleCondition: string = this.route.snapshot.url.toString() === VehicleGlobalProps.Condition.Used ?
+    VehicleGlobalProps.Condition.Used : VehicleGlobalProps.Condition.New;
 
     this.vehicleService.getAllVehicles(vehicleCondition).subscribe(data => {
       this.vehicles = data;
     }, error => {
       console.log(error);
-    })
+    });
   }
 }

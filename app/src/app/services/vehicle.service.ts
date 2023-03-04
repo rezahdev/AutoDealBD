@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { IVehicle } from '../vehicle/IVehicle.interface';
-import { VehicleSettings } from '../vehicle/Vehicle.settings';
+import { Vehicle } from '../models/vehicle';
+import { VehicleGlobalProps } from '../vehicle/vehicle-global-props';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +16,23 @@ export class VehicleService {
    * @param vehicleCondition the condition of the vehicles to be retrieved (used or new).
    * @returns Observable of the list of vehicles with the given condition.
    */
-  getAllVehicles(vehicleCondition: string): Observable<IVehicle[]> {
+  getAllVehicles(vehicleCondition: string): Observable<Vehicle[]> {
     return this.http.get('data/vehicles.json').pipe(
       map(res => {
-        const vehicleArray: Array<IVehicle> = [];
+        const vehicleArray: Array<Vehicle> = [];
 
         for (const id in res) {
           if (res.hasOwnProperty(id)) {
             const data = res[id as keyof object];
 
-            if (VehicleSettings.CONDITION.Match(data['condition'], vehicleCondition)) {
-              let vehicle: IVehicle = {
-                Id: +data['id'],
-                Title: data['title'],
-                VehicleType: data['vehicleType'],
-                Condition: data['condition'],
-                Price: +data['price'],
-                Images: data['images']
+            if (VehicleGlobalProps.Condition.Match(data['condition'], vehicleCondition)) {
+              let vehicle: Vehicle = {
+                id: +data['id'],
+                title: data['title'],
+                vehicleType: data['vehicleType'],
+                condition: data['condition'],
+                price: +data['price'],
+                images: data['images']
               }
               vehicleArray.push(vehicle);
             }

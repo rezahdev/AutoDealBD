@@ -1,13 +1,13 @@
 <div class="shadow-lg p-1 rounded">
     <div class="card border-0">
         <div class="img-wrapper">
-            <img *ngIf="vehicle.Images.length > 0" src="assets/images/{{ vehicle.Images[0] }}" class="card-img-top"
+            <img *ngIf="vehicle.images.length > 0" src="assets/images/{{ vehicle.images[0] }}" class="card-img-top"
                 alt="Car Image" />
-            <img *ngIf="vehicle.Images.length == 0" src="assets/images/default.jpg" class="card-img-top"
+            <img *ngIf="vehicle.images.length == 0" src="assets/images/default.jpg" class="card-img-top"
                 alt="Car Default Image" />
             <ul class="list-inline text-center arrow-btn">
                 <li class="list-inline-item">
-                    <button class="btn btn-primary" routerLink="/detail/{{ vehicle.Id }}">
+                    <button class="btn btn-primary" routerLink="/detail/{{ vehicle.id }}">
                         <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
                 </li>
@@ -22,11 +22,13 @@
             </ul>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ vehicle.Title }}</h5>
-            <p>Id: {{ vehicle.Id }}</p>
-            <p class="card-text">Price: ${{ vehicle.Price }}</p>
-            <p>Type: {{ vehicle.VehicleType }}</p>
-            <p>Condition: {{ vehicle.Condition }}</p>
+            <h5 class="card-title">{{ vehicle.title }}</h5>
+            <p>
+                Id: {{ vehicle.id }}<br>
+                Price: ${{ vehicle.price }}<br>
+                Type: {{ vehicle.vehicleType }}<br>
+                Condition: {{ vehicle.condition }}
+            </p>
         </div>
     </div>
 </div>

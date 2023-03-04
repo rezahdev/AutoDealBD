@@ -1,5 +1,5 @@
-export class VehicleSettings {
-    public static readonly CONDITION = {
+export class VehicleGlobalProps {
+    public static readonly Condition = {
         Used: "used", 
         New: "new",
         IsUsed: (vehicleCondition: string): boolean => {

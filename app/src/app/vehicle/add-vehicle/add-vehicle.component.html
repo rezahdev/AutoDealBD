@@ -17,8 +17,8 @@
             <div class="form-group col-12 mb-3">
                 <label for="Condition">Vehicle Condition</label>
                 <select name="condition" class="form-select mt-1" #condition="ngModel" ngModel required>
-                    <option value="{{ CONDITION.Used }}">Used</option>
-                    <option value="{{ CONDITION.New }}">New</option>
+                    <option value="{{ vehicleCondition.Used }}">Used</option>
+                    <option value="{{ vehicleCondition.New }}">New</option>
                 </select>
                 <span class="error-msg" *ngIf="condition.touched && !condition.valid">
                     Condition is required

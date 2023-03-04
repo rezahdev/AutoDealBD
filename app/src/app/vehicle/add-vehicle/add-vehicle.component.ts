@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-
-import { VehicleSettings } from '../Vehicle.settings'
+import { Vehicle } from 'src/app/models/vehicle';
+import { VehicleGlobalProps } from '../vehicle-global-props'
 
 @Component({
   selector: 'app-add-vehicle',
@@ -11,16 +11,14 @@ import { VehicleSettings } from '../Vehicle.settings'
 })
 
 export class AddVehicleComponent implements OnInit {
-  readonly CONDITION = {
-    Used: VehicleSettings.CONDITION.Used,
-    New: VehicleSettings.CONDITION.New
+  readonly vehicleCondition = {
+    Used: VehicleGlobalProps.Condition.Used,
+    New: VehicleGlobalProps.Condition.New
   }
 
   constructor() { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   onFormSubmit(form: NgForm): void {
     console.log(form);

@@ -15,6 +15,8 @@ import { VehicleDetailComponent } from './vehicle/vehicle-detail/vehicle-detail.
 import { AddVehicleComponent } from './vehicle/add-vehicle/add-vehicle.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
+import { UserService } from './services/user.service';
+import { AlertifyService } from './services/alertify.service';
 
 const routes: Routes = [
   { path: '', component: VehicleListComponent },
@@ -45,7 +47,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
-    VehicleService
+    VehicleService,
+    UserService,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })
