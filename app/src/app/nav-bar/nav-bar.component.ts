@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -6,11 +7,18 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
+
 export class NavBarComponent {
 
-  isCollapsed = false;
+  isCollapsed = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { 
+    router.events.subscribe(val => {
+      if(this.isCollapsed && val instanceof NavigationEnd) {
+        this.isCollapsed = true;
+      }
+    })
+  }
 
   get isUserLoggedIn(): boolean {
     return this.authService.isUserLoggedIn();
@@ -22,5 +30,6 @@ export class NavBarComponent {
 
   onLogout() {
     this.authService.logoutUser();
+    this.isCollapsed = true;
   }
 }

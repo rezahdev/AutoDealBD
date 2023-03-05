@@ -7,36 +7,61 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse justify-between" id="collapseBasic" [collapse]="!isCollapsed">
+    <div class="navbar-collapse justify-between" id="collapseBasic" [collapse]="isCollapsed">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-            routerLink="/">New Cars</a>
+          <a class="nav-link" aria-current="page" 
+            routerLinkActive="active" 
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLink="/"
+            (click)="!isCollapsed? isCollapsed = !isCollapsed : false">
+            New Cars
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/used">Used Cars</a>
+          <a class="nav-link" 
+            routerLinkActive="active" 
+            routerLink="/used" 
+            (click)="!isCollapsed? isCollapsed = !isCollapsed : false">
+            Used Cars
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/post">Post Ad</a>
+          <a class="nav-link" 
+            routerLinkActive="active" 
+            routerLink="/post" 
+            (click)="!isCollapsed? isCollapsed = !isCollapsed : false">
+            Post Ad
+          </a>
         </li>
       </ul>
       <ul class="nav navbar-nav">
-        <div *ngIf="isCollapsed" class="border-top border-4"></div>
+        <div *ngIf="!isCollapsed" class="border-top border-4"></div>
         <li *ngIf="!isUserLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+          <a class="nav-link" 
+            routerLink="/login" 
+            routerLinkActive="active" 
+            (click)="!isCollapsed? isCollapsed = !isCollapsed : false">
+            Login
+          </a>
         </li>
         <li *ngIf="!isUserLoggedIn" class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+          <a class="nav-link" 
+            routerLink="/register" 
+            routerLinkActive="active"
+            (click)="!isCollapsed? isCollapsed = !isCollapsed : false">
+            Register
+          </a>
         </li>
-        <div *ngIf="isUserLoggedIn && isCollapsed" class="border-top border-4">
+        <div *ngIf="isUserLoggedIn && !isCollapsed" class="border-top border-4">
           <li class="nav-item">
-            <a class="nav-link" role="button" (click)="false">Profile</a>
+            <a class="nav-link" role="button" (click)="isCollapsed = !isCollapsed">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" role="button" (click)="false">Messages</a>
+            <a class="nav-link" role="button" (click)="isCollapsed = !isCollapsed">Messages</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" role="button" (click)="false">Settings</a>
+            <a class="nav-link" role="button" (click)="isCollapsed = !isCollapsed">Settings</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" role="button" (click)="onLogout()">Logout</a>
@@ -47,7 +72,7 @@
           <a class="nav-link" role="button" (click)="onLogout()">Logout</a>
         </li> -->
 
-        <div *ngIf="isUserLoggedIn && !isCollapsed" class="btn-group" dropdown>
+        <div *ngIf="isUserLoggedIn && isCollapsed" class="btn-group" dropdown>
           <button id="button-animated" 
                   dropdownToggle 
                   type="button" 

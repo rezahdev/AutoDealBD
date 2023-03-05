@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { AppComponent } from './app.component';
 import { VehicleCardComponent } from './vehicle/vehicle-card/vehicle-card.component';
@@ -51,7 +52,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
-    CollapseModule
+    CollapseModule,
+    TabsModule
   ],
   providers: [
     VehicleService,

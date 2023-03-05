@@ -2,41 +2,50 @@
     <div class="card-header">Post an adverstisement for your vehicle.</div>
     <div class="card-body">
         <form (ngSubmit)="onFormSubmit(form)" #form="ngForm">
-            <div class="form-group col-12 mb-3">
-                <label for="title">Advertisement Title</label>
-                <input type="text" name="title" class="form-control mt-1" #title="ngModel" ngModel required
-                    minlength="10" maxlength="50" />
-                <span class="error-msg" *ngIf="title.touched && !title.valid">
-                    <span *ngIf="title.errors?.['required']">Title is required</span>
-                    <span *ngIf="title.errors?.['minlength']">Title must be at least 10 characters</span>
-                </span>
-                <span class="warning-msg" *ngIf="title?.value?.length > 40">
-                    {{ 50 - title?.value?.length }} characters left
-                </span>
+            <div>
+                <tabset>
+                  <tab heading="Basic title" id="tab1">
+                    <div class="form-group col-12 mb-3">
+                        <label for="title">Advertisement Title</label>
+                        <input type="text" name="title" class="form-control mt-1" #title="ngModel" ngModel required
+                            minlength="10" maxlength="50" />
+                        <span class="error-msg" *ngIf="title.touched && !title.valid">
+                            <span *ngIf="title.errors?.['required']">Title is required</span>
+                            <span *ngIf="title.errors?.['minlength']">Title must be at least 10 characters</span>
+                        </span>
+                        <span class="warning-msg" *ngIf="title?.value?.length > 40">
+                            {{ 50 - title?.value?.length }} characters left
+                        </span>
+                    </div>
+                    <div class="form-group col-12 mb-3">
+                        <label for="Condition">Vehicle Condition</label>
+                        <select name="condition" class="form-select mt-1" #condition="ngModel" ngModel required>
+                            <option value="{{ vehicleCondition.Used }}">Used</option>
+                            <option value="{{ vehicleCondition.New }}">New</option>
+                        </select>
+                        <span class="error-msg" *ngIf="condition.touched && !condition.valid">
+                            Condition is required
+                        </span>
+                    </div>
+                    <div class="form-group col-12 mb-4">
+                        <label for="price">Vehicle Price</label>
+                        <input type="text" name="price" class="form-control mt-1" #price="ngModel" ngModel required />
+                        <span class="error-msg" *ngIf="price.touched && !price.valid">
+                            Price is required
+                        </span>
+                    </div>
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-primary submit-btn" [disabled]="!form.valid">
+                            Post Ad
+                        </button>
+                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                  </tab>
+                  <tab heading="Basic Title 1">Basic content 1</tab>
+                  <tab heading="Basic Title 2">Basic content 2</tab>
+                </tabset>
             </div>
-            <div class="form-group col-12 mb-3">
-                <label for="Condition">Vehicle Condition</label>
-                <select name="condition" class="form-select mt-1" #condition="ngModel" ngModel required>
-                    <option value="{{ vehicleCondition.Used }}">Used</option>
-                    <option value="{{ vehicleCondition.New }}">New</option>
-                </select>
-                <span class="error-msg" *ngIf="condition.touched && !condition.valid">
-                    Condition is required
-                </span>
-            </div>
-            <div class="form-group col-12 mb-4">
-                <label for="price">Vehicle Price</label>
-                <input type="text" name="price" class="form-control mt-1" #price="ngModel" ngModel required />
-                <span class="error-msg" *ngIf="price.touched && !price.valid">
-                    Price is required
-                </span>
-            </div>
-            <div class="form-group col-12">
-                <button type="submit" class="btn btn-primary submit-btn" [disabled]="!form.valid">
-                    Post Ad
-                </button>
-                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-            </div>
+            
         </form>
     </div>
 </div>
