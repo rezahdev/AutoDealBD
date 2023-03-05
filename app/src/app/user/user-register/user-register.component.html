@@ -9,7 +9,7 @@
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" formControlName="userName" />
             <span *ngIf="(userName.touched || isFormSubmitted) && userName.hasError('required')" class="error-msg">
-              Name is required
+              Please enter your name
             </span>
           </div>
 
@@ -17,7 +17,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="text" class="form-control" formControlName="email" />
             <span *ngIf="(email.touched || isFormSubmitted) && email.hasError('required')" class="error-msg">
-              Email is required<br>
+              Please enter your email<br>
             </span>
             <span *ngIf="(email.touched || isFormSubmitted) && email.hasError('email')" class="error-msg">
               Invalid email
@@ -28,7 +28,7 @@
             <label for="passwrod" class="form-label">Password</label>
             <input type="password" class="form-control" formControlName="password" />
             <span *ngIf="(password.touched || isFormSubmitted) && password.hasError('required')" class="error-msg">
-              Password is required<br>
+              Please enter a password<br>
             </span>
             <span *ngIf="(password.touched || isFormSubmitted) && password.hasError('minlength')" class="error-msg">
               Password must be at least 8 characters
@@ -36,10 +36,10 @@
           </div>
 
           <div class="form-group col-12 mb-3">
-            <label for="cpassword" class="form-label">Confirm Password</label>
+            <label for="cpassword" class="form-label">Retype Password</label>
             <input type="password" class="form-control" formControlName="confirmPassword" />
             <span *ngIf="(confirmPassword.touched || isFormSubmitted) && confirmPassword.hasError('required')" class="error-msg">
-              Confirm password is required<br>
+              Please retype password<br>
             </span>
             <span *ngIf="(confirmPassword.touched || isFormSubmitted) && registrationForm.hasError('passwordMismatch')" class="error-msg">
               Password doesn't match

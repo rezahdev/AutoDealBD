@@ -42,7 +42,7 @@ export class UserRegisterComponent implements OnInit {
     this.createRegistrationForm();
   }
 
-  createRegistrationForm()
+  createRegistrationForm(): void
   {
     this.registrationForm = this.formBuilder.group({
       userName: new FormControl(null, [Validators.required]),
@@ -60,7 +60,7 @@ export class UserRegisterComponent implements OnInit {
     return cpassword === password? null : { passwordMismatch: true };
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.isFormSubmitted = true;
     
     if(this.registrationForm.valid) {

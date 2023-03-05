@@ -3,22 +3,6 @@
     width: 75%;
 }
 
-a {
-    color: dimgray;
-}
-
-.navbar-brand {
-    color: black ;
-}
-
-a:hover {
-    color: royalblue;
-}
-
-.active {
-    color: red !important;
-}
-
 @media(max-width: 1000px) {
     .container-fluid {
         width: 100%;
