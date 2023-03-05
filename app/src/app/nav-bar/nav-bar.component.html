@@ -1,11 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-light shadow fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/">AutoDealBD</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+
+    <button type="button" class="navbar-toggler btn btn-primary" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-between" id="navbarSupportedContent">
+
+    <div class="navbar-collapse justify-between" id="collapseBasic" [collapse]="!isCollapsed">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
@@ -19,17 +21,33 @@
         </li>
       </ul>
       <ul class="nav navbar-nav">
+        <div *ngIf="isCollapsed" class="border-top border-4"></div>
         <li *ngIf="!isUserLoggedIn" class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
         </li>
         <li *ngIf="!isUserLoggedIn" class="nav-item">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
         </li>
-        <!-- <li *ngIf="isUserLoggedIn()" class="nav-item">
+        <div *ngIf="isUserLoggedIn && isCollapsed" class="border-top border-4">
+          <li class="nav-item">
+            <a class="nav-link" role="button" (click)="false">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" role="button" (click)="false">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" role="button" (click)="false">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" role="button" (click)="onLogout()">Logout</a>
+          </li>
+        </div>
+        <!-- 
+          <li *ngIf="isUserLoggedIn()" class="nav-item">
           <a class="nav-link" role="button" (click)="onLogout()">Logout</a>
         </li> -->
 
-        <div *ngIf="isUserLoggedIn" class="btn-group" dropdown>
+        <div *ngIf="isUserLoggedIn && !isCollapsed" class="btn-group" dropdown>
           <button id="button-animated" 
                   dropdownToggle 
                   type="button" 
