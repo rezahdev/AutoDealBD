@@ -1,5 +1,5 @@
-<div class="vehicle-list-container row">
-    <div *ngFor="let vehicle of vehicles" class="shadow-none col-sm p-3 d-flex justify-content-center">
-        <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
+<div class="vehicle-list-container">
+    <div class="shadow-none d-flex justify-content-around flex-wrap">
+        <app-vehicle-card *ngFor="let vehicle of vehicles" [vehicle]="vehicle"></app-vehicle-card>
     </div>
 </div>

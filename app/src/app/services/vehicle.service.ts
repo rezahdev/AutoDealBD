@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Vehicle } from '../models/vehicle';
-import { VehicleGlobalProps } from '../vehicle/vehicle-global-props';
+import { VehicleAttributes } from '../models/vehicle-attributes';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +23,32 @@ export class VehicleService {
 
         for (const id in res) {
           if (res.hasOwnProperty(id)) {
-            const data = res[id as keyof object];
+            const vehicleData = res[id as keyof object];
 
-            if (VehicleGlobalProps.Condition.Match(data['condition'], vehicleCondition)) {
+            if (vehicleData['isAvailable'] && VehicleAttributes.MatchCondition(vehicleData['condition'], vehicleCondition)) {
               let vehicle: Vehicle = {
-                id: +data['id'],
-                title: data['title'],
-                vehicleType: data['vehicleType'],
-                condition: data['condition'],
-                price: +data['price'],
-                images: data['images']
+                id: +vehicleData['id'],
+                sellerId: +vehicleData['sellerId'],
+                price: +vehicleData['price'],
+                condition: vehicleData['condition'],
+                bodyType: vehicleData['bodyType'],
+                make: vehicleData['make'],
+                model: vehicleData['model'],
+                year: +vehicleData['year'],
+                mileage: +vehicleData['mileage'],
+                transmission: vehicleData['transmission'],
+                engine: vehicleData['engine'],
+                power: +vehicleData['power'],
+                drivetrain: vehicleData['drivetrain'],
+                fuelType: vehicleData['fuelType'],
+                seatingCapacity: +vehicleData['seatingCapacity'],
+                doors: +vehicleData['doors'],
+                exteriorColor: vehicleData['exeriorColor'],
+                options: vehicleData['options'],
+                images: vehicleData['images'],
+                description: vehicleData['description'],
+                isAvailable: vehicleData['isAvailable'],
+                address: vehicleData['address']
               }
               vehicleArray.push(vehicle);
             }

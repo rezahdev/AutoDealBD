@@ -1,11 +1,11 @@
-<div class="shadow-lg p-1 rounded">
+<div class="shadow-lg rounded">
     <div class="card border-0">
         <div class="img-wrapper">
             <img *ngIf="vehicle.images.length > 0" src="assets/images/{{ vehicle.images[0] }}" class="card-img-top"
                 alt="Car Image" />
-            <img *ngIf="vehicle.images.length == 0" src="assets/images/default.jpg" class="card-img-top"
+            <img *ngIf="vehicle.images.length === 0" src="assets/images/default.jpg" class="card-img-top"
                 alt="Car Default Image" />
-            <ul class="list-inline text-center arrow-btn">
+            <ul class="list-inline text-center arrow-btn" *ngIf="!hideIcons">
                 <li class="list-inline-item">
                     <button class="btn btn-primary" routerLink="/detail/{{ vehicle.id }}">
                         <fa-icon [icon]="faEdit"></fa-icon>
@@ -22,12 +22,32 @@
             </ul>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ vehicle.title }}</h5>
+            <p *ngIf="isValidAddress" class="address-tag m-0 mb-2">
+                {{vehicle.address.city}}, {{vehicle.address.province}}
+            </p>
+            <h5 class="card-title">
+                <span *ngIf="isValidYear">{{ vehicle.year }} </span>
+                <span *ngIf="isValidMake">{{ vehicle.make }} </span>
+                <span *ngIf="isValidModel">{{ vehicle.model }} </span>
+            </h5>
             <p>
-                Id: {{ vehicle.id }}<br>
-                Price: ${{ vehicle.price }}<br>
-                Type: {{ vehicle.vehicleType }}<br>
-                Condition: {{ vehicle.condition }}
+                <span *ngIf="isValidPrice">
+                    <b>${{ vehicle.price }}</b>
+                    <span *ngIf="vehicle.mileage"> | </span>
+                    <span *ngIf="!vehicle.mileage"> <br> </span>
+                </span>
+                <span *ngIf="isValidMileage">
+                    <b>{{ vehicle.mileage }} KM</b><br>
+                </span> 
+                <span *ngIf="isValidDrivetrain" class="feature-tag">
+                    {{ vehicle.drivetrain }} 
+                </span>
+                <span *ngIf="isValidTransmission" class="feature-tag">
+                    {{ vehicle.transmission }} 
+                </span>
+                <span *ngIf="isValidEngine" class="feature-tag">
+                    {{ vehicle.engine }} engine 
+                </span>
             </p>
         </div>
     </div>

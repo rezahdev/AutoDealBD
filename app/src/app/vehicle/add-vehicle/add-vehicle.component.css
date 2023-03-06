@@ -1,4 +1,53 @@
-.card {
-  width: 60%;
-  margin: 0 0 0 20%;
+.add-vehicle-container {
+  width: 75%;
+  margin: 0 0 0 12%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.add-vehicle-form-container {
+  width: 65%;
+  margin-right: 10px;
+}
+
+.side-preview-container {
+  width: auto;
+}
+
+.tab-preview-container {
+  width: 300px;
+}
+
+.photo-control {
+  min-height: 300px;
+  vertical-align: middle;
+  text-align: center;
+  border: 1px dashed blue;
+  margin: 5px;
+}
+
+.btn-group > label[ng-reflect-btn-radio] {
+  padding: 0 15px;
+  line-height: 30px;
+}
+
+@media(max-width: 1500px) {
+  .add-vehicle-container {
+    width: 96%;
+    margin-left: 2%;
+  }
+}
+
+@media(max-width: 800px) {
+  .add-vehicle-form-container {
+    width: 100%;
+  }
+}
+
+@media(max-width: 350px) {
+  .tab-preview-container {
+    width: 100%;
+  }
 }

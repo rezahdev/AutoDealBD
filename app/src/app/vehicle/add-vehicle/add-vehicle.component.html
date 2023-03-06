@@ -1,51 +1,321 @@
-<div class="card">
-    <div class="card-header">Post an adverstisement for your vehicle.</div>
-    <div class="card-body">
-        <form (ngSubmit)="onFormSubmit(form)" #form="ngForm">
-            <div>
-                <tabset>
-                  <tab heading="Basic title" id="tab1">
-                    <div class="form-group col-12 mb-3">
-                        <label for="title">Advertisement Title</label>
-                        <input type="text" name="title" class="form-control mt-1" #title="ngModel" ngModel required
-                            minlength="10" maxlength="50" />
-                        <span class="error-msg" *ngIf="title.touched && !title.valid">
-                            <span *ngIf="title.errors?.['required']">Title is required</span>
-                            <span *ngIf="title.errors?.['minlength']">Title must be at least 10 characters</span>
-                        </span>
-                        <span class="warning-msg" *ngIf="title?.value?.length > 40">
-                            {{ 50 - title?.value?.length }} characters left
-                        </span>
-                    </div>
-                    <div class="form-group col-12 mb-3">
-                        <label for="Condition">Vehicle Condition</label>
-                        <select name="condition" class="form-select mt-1" #condition="ngModel" ngModel required>
-                            <option value="{{ vehicleCondition.Used }}">Used</option>
-                            <option value="{{ vehicleCondition.New }}">New</option>
-                        </select>
-                        <span class="error-msg" *ngIf="condition.touched && !condition.valid">
-                            Condition is required
-                        </span>
-                    </div>
-                    <div class="form-group col-12 mb-4">
-                        <label for="price">Vehicle Price</label>
-                        <input type="text" name="price" class="form-control mt-1" #price="ngModel" ngModel required />
-                        <span class="error-msg" *ngIf="price.touched && !price.valid">
-                            Price is required
-                        </span>
-                    </div>
-                    <div class="form-group col-12">
-                        <button type="submit" class="btn btn-primary submit-btn" [disabled]="!form.valid">
-                            Post Ad
-                        </button>
-                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                    </div>
-                  </tab>
-                  <tab heading="Basic Title 1">Basic content 1</tab>
-                  <tab heading="Basic Title 2">Basic content 2</tab>
-                </tabset>
+<div class="add-vehicle-container mb-5">
+    <div class="add-vehicle-form-container card mb-5">
+        <div class="card-header">List your vehice for sale.</div>
+        <div class="card-body p-0">
+            <form [formGroup]="addVehicleForm">
+                <div class="tab-panel">
+                    <tabset class="member-tabset" #formTabs>
+                        <tab heading="Basic info">
+                            <div class="d-flex flex-row flex-wrap justify-content-between mt-3">
+                                <div class="form-group col-5  mb-3">
+                                    <p class="m-0">Condition</p>
+                                    <div class="btn-group mt-1" btnRadioGroup formControlName="condition" [(ngModel)]="vehiclePreview.condition">
+                                        <label class="btn btn-outline-primary" role="button" name="condition"
+                                            btnRadio="{{conditionAttr.New}}">New</label>
+                                        <label class="btn btn-outline-primary" role="button" name="condition"
+                                            btnRadio="{{conditionAttr.Used}}" > Used </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6 mb-3">
+                                    <label for="make">Make</label>
+                                    <select class="form-select mt-1" formControlName="make"
+                                        [(ngModel)]="vehiclePreview.make">
+                                        <option *ngFor="let prop of makeAttr | keyvalue" value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                    <span class="error-msg"
+                                        *ngIf="(condition.touched || isAddVehicleFormSubmitted) && !condition.valid">
+                                        Please select vehicle make
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap justify-content-between">
+                                <div class="form-group col-5 mb-3">
+                                    <label for="model">Model</label>
+                                    <input type="text" class="form-control mt-1" formControlName="model"
+                                        [(ngModel)]="vehiclePreview.model" />
+                                    <span class="error-msg"
+                                        *ngIf="(model.touched || isAddVehicleFormSubmitted) && !model.valid">
+                                        <span *ngIf="model.hasError('required')">Please enter the vehicle
+                                            model<br></span>
+                                        <span *ngIf="model.hasError('maxlength')">Vehicle model cannot exceed 100
+                                            characters</span>
+                                    </span>
+                                </div>
+                                <div class="form-group col-6 mb-3">
+                                    <label for="bodyType">Body type</label>
+                                    <select class="form-select mt-1" formControlName="bodyType"
+                                        [(ngModel)]="vehiclePreview.bodyType">
+                                        <option *ngFor="let prop of bodyTypeAttr | keyvalue" value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                    <span class="error-msg"
+                                        *ngIf="(bodyType.touched || isAddVehicleFormSubmitted) && !bodyType.valid">
+                                        Please select body type
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap justify-content-between">
+                                <div class="form-group col-5  mb-3">
+                                    <label for="year">Year</label>
+                                    <input type="number" class="form-control mt-1" formControlName="year"
+                                        [(ngModel)]="vehiclePreview.year" />
+                                    <span class="error-msg"
+                                        *ngIf="(year.touched || isAddVehicleFormSubmitted) && !year.valid">
+                                        Invalid year
+                                    </span>
+                                </div>
+                                <div class="form-group col-6 mb-3">
+                                    <label for="mileage">Mileage in Kilometres{{ condition.value === conditionAttr.New? ' (Optional)'
+                                        : '' }}</label>
+                                    <input type="number" class="form-control mt-1" formControlName="mileage"
+                                        [(ngModel)]="vehiclePreview.mileage" />
+                                    <span class="error-msg"
+                                        *ngIf="(mileage.touched || isAddVehicleFormSubmitted) && !mileage.valid">
+                                        Invalid mileage
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap justify-content-between">
+                                <div class="form-group col-5 mb-3">
+                                    <label for="drivetrain">Drivetrain</label>
+                                    <select class="form-select mt-1" formControlName="drivetrain"
+                                        [(ngModel)]="vehiclePreview.drivetrain">
+                                        <option *ngFor="let prop of drivetrainAttr | keyvalue" value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                    <span class="error-msg"
+                                        *ngIf="(drivetrain.touched || isAddVehicleFormSubmitted) && !drivetrain.valid">
+                                        Please select vehicle drivetrain
+                                    </span>
+                                </div>
+                                <div class="form-group col-6 mb-3">
+                                    <label for="transmission">Transmission</label>
+                                    <select class="form-select mt-1" formControlName="transmission"
+                                        [(ngModel)]="vehiclePreview.transmission">
+                                        <option *ngFor="let prop of transmissionAttr | keyvalue"
+                                            value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                    <span class="error-msg"
+                                        *ngIf="(transmission.touched || isAddVehicleFormSubmitted) && !transmission.valid">
+                                        Please select vehicle transmission
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <button type="submit" class="btn btn-primary submit-btn" (click)="selectTab(1)">
+                                    Next
+                                </button>
+                            </div>
+                        </tab>
+
+                        <tab heading="Optional info">
+                            <div class="d-flex flex-row flex-wrap justify-content-between mt-3">
+                                <div class="form-group col-5 mb-3">
+                                    <label for="engine">Engine</label>
+                                    <select class="form-select mt-1" formControlName="engine"
+                                        [(ngModel)]="vehiclePreview.engine">
+                                        <option *ngFor="let prop of engineAttr | keyvalue" value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6 mb-3">
+                                    <label for="power">Power (HP)</label>
+                                    <input type="number" class="form-control mt-1" formControlName="power"
+                                        [(ngModel)]="vehiclePreview.power" />
+                                    <span class="error-msg"
+                                        *ngIf="(power.touched || isAddVehicleFormSubmitted) && !power.valid">
+                                        Invalid power
+                                    </span>
+                                </div>
+                                <div class="form-group col-5 mb-3">
+                                    <label for="fuelType">Fuel Type</label>
+                                    <select class="form-select mt-1" formControlName="fuelType"
+                                        [(ngModel)]="vehiclePreview.fuelType">
+                                        <option *ngFor="let prop of fuelTypeAttr | keyvalue" value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6  mb-3">
+                                    <label for="seatingCapacity">Seating capacity</label>
+                                    <input type="number" class="form-control mt-1" formControlName="seatingCapacity"
+                                        [(ngModel)]="vehiclePreview.seatingCapacity" />
+                                    <span class="error-msg"
+                                        *ngIf="(seatingCapacity.touched || isAddVehicleFormSubmitted) && !seatingCapacity.valid">
+                                        Invalid seating capcity
+                                    </span>
+                                </div>
+                                <div class="form-group col-5 mb-3">
+                                    <label for="doors">Number of Doors</label>
+                                    <input type="number" class="form-control mt-1" formControlName="doors"
+                                        [(ngModel)]="vehiclePreview.doors" />
+                                    <span class="error-msg"
+                                        *ngIf="(doors.touched || isAddVehicleFormSubmitted) && !doors.valid">
+                                        Invalid door number
+                                    </span>
+                                </div>
+                                <div class="form-group col-6 mb-3">
+                                    <label for="exteriorColor">Exterior Color</label>
+                                    <input type="text" class="form-control mt-1" formControlName="exteriorColor"
+                                        [(ngModel)]="vehiclePreview.exteriorColor" />
+                                    <span class="error-msg"
+                                        *ngIf="(exteriorColor.touched || isAddVehicleFormSubmitted) && !exteriorColor.valid">
+                                        Exterior color cannot exceed 25 charaters
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group col-12 mb-3 ">
+                                <label for="options">Select additional features</label>
+                                <select class="form-select mt-1" multiple formControlName="options"
+                                    [(ngModel)]="vehiclePreview.options">
+                                    <option *ngFor="let prop of optionsAttr | keyvalue" value="{{ prop.value }}">
+                                        {{ prop.value }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
+                                <button type="button" class="btn btn-outline-primary submit-btn" (click)="selectTab(0)">
+                                    Go Back
+                                </button>
+                                <button type="button" class="btn btn-primary submit-btn" (click)="selectTab(2)">
+                                    Next
+                                </button>
+                            </div>
+                        </tab>
+
+                        <tab heading="Listing Info">
+                            <div class="form-group col-12 col-md-6 mb-3 mt-3">
+                                <label for="price">Price</label>
+                                <input type="number" class="form-control mt-1" formControlName="price"
+                                    [(ngModel)]="vehiclePreview.price" />
+                                <span class="error-msg"
+                                    *ngIf="(price.touched || isAddVehicleFormSubmitted) && !price.valid">
+                                    Invalid price
+                                </span>
+                            </div>
+                            <div class="form-group col-12 mb-3">
+                                <label for="description">Description (optional)</label>
+                                <textarea class="form-control mt-1" formControlName="description"
+                                    [(ngModel)]="vehiclePreview.description"></textarea>
+                                <span class="error-msg"
+                                    *ngIf="(description.touched || isAddVehicleFormSubmitted) && !description.valid">
+                                    Description is too long
+                                </span>
+                            </div>
+                            <div class="form-group col-12">
+                                <button type="button" class="btn btn-outline-primary submit-btn" (click)="selectTab(1)">
+                                    Go Back
+                                </button>
+                                <button type="button" class="btn btn-primary submit-btn" (click)="selectTab(3)">
+                                    Next
+                                </button>
+                            </div>
+                        </tab>
+
+                        <tab heading="Address">
+                            <div class="form-group col-12 mb-3 mt-3">
+                                <label for="street">Street</label>
+                                <input type="text" class="form-control mt-1" formControlName="street"
+                                    [(ngModel)]="vehiclePreview.address.street" />
+                                <span class="error-msg"
+                                    *ngIf="(street.touched || isAddVehicleFormSubmitted) && !street.valid">
+                                    Invalid street address
+                                </span>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap justify-content-between">
+                                <div class="form-group col-12 col-md-6 mb-3">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control mt-1" formControlName="city"
+                                        [(ngModel)]="vehiclePreview.address.city" />
+                                    <span class="error-msg"
+                                        *ngIf="(city.touched || isAddVehicleFormSubmitted) && !city.valid">
+                                        Invalid city name
+                                    </span>
+                                </div>
+                                <div class="form-group col-12 col-md-5 mb-3">
+                                    <label for="province">Province</label>
+                                    <select class="form-select mt-1" formControlName="province"
+                                        [(ngModel)]="vehiclePreview.address.province">
+                                        <option *ngFor="let prop of provinceAttr | keyvalue" value="{{ prop.value }}">
+                                            {{ prop.value }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <button type="button" class="btn btn-outline-primary submit-btn" (click)="selectTab(2)">
+                                    Go Back
+                                </button>
+                                <button type="button" class="btn btn-primary submit-btn" (click)="selectTab(4)">
+                                    Next
+                                </button>
+                            </div>
+
+
+                        </tab>
+
+                        <tab heading="Image">
+                            <div class="form-group col-12 mb-3">
+                                <div class="photo-control">
+                                    <button type="button" class="mt-5"> Upload </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <button type="button" class="btn btn-outline-primary submit-btn" (click)="selectTab(3)">
+                                    Go Back
+                                </button>
+
+                                <button type="button" class="btn btn-primary submit-btn"
+                                    *ngIf="screenWidth && screenWidth <= 1200" (click)="selectTab(5)">
+                                    Preview and Save
+                                </button>
+
+                                <button type="reset" class="btn btn-outline-secondary submit-btn"
+                                    *ngIf="screenWidth && screenWidth > 1200">
+                                    Cancel
+                                </button>
+
+                                <button type="submit" class="btn btn-primary submit-btn"
+                                    *ngIf="screenWidth && screenWidth > 1200">
+                                    Save
+                                </button>
+                            </div>
+                        </tab>
+
+                        <tab heading="Preview" class="tab-preview-container" *ngIf="screenWidth && screenWidth <= 1200">
+                            <app-vehicle-card [vehicle]="vehiclePreview" [hideIcons]="true"></app-vehicle-card>
+                            <div class="form-group col-12 mt-3">
+                                <button type="button" class="btn btn-outline-primary submit-btn" (click)="selectTab(4)">
+                                    Go Back
+                                </button>
+
+                                <button type="reset" class="btn btn-outline-secondary submit-btn">
+                                    Cancel
+                                </button>
+
+                                <button type="submit" class="btn btn-primary submit-btn">
+                                    Save
+                                </button>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="side-preview-container" *ngIf="screenWidth && screenWidth > 1200">
+        <div class="card">
+            <div class="card-header">
+                Preview
             </div>
-            
-        </form>
+            <app-vehicle-card [vehicle]="vehiclePreview" [hideIcons]="true"></app-vehicle-card>
+        </div>
     </div>
 </div>

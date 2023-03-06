@@ -1,12 +1,26 @@
+textarea {
+  resize: none;
+  min-height: 150px;
+}
+
 .ng-invalid.ng-touched {
   border-color: red;
 }
+
 .error-msg {
   color: red;
 }
+
 .warning-msg {
   color: orange;
 }
-.submit-btn {
-  margin: 0 10px 0 0;
+
+.btn {
+  margin: 0 10px 10px 0;
 }
+
+.btn[name="condition"] {
+  border-radius: 25px;
+}
+
+
