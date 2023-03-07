@@ -5,16 +5,18 @@ h5 {
 
 .card {
   width: 250px;
-  margin-top: 15px;
+  margin: 15px 2px 2px 2px;
 }
 
 .card img {
+  width: 100%;
   transform: scale(1);
   transition-duration: 500ms;
   transition-timing-function: ease-out;
 }
 
 .img-wrapper {
+  max-height: 150px;
   overflow: hidden;
   position: relative;
   height: 150px;
@@ -57,8 +59,12 @@ h5 {
   font-size: 12px;
 }
 
-@media(max-width: 300px) {
+@media(max-width: 450px) {
   .card {
     width: 100%;
+  }
+  .img-wrapper, .card img {
+    width: calc(100vw - 40px);
+    max-height: 200px; 
   }
 }

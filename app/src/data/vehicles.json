@@ -32,7 +32,7 @@
         "id": 2,
         "sellerId": 1,
         "price": 13000,
-        "condition": "new",
+        "condition": "used",
         "bodyType": "sedan",
         "make": "BMW",
         "model": "M3",
